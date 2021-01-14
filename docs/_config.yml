@@ -7,7 +7,7 @@ title                    : "667"
 title_separator          : "|"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Akash R"
-description              : "Educational and personal blog posts encompassing tech and beyond"
+description              : "Sometimes, I think"
 url                      : "https://akashirl.live" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : Akash667/akash667.github.io # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
