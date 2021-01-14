@@ -30,7 +30,7 @@ twitter_username: vaultboy900
 github_username:  Akash667
 
 # Build settings
-theme: jekyll-theme-basically-basic
+theme: jekyll-theme-cayman
 plugins:
   - jekyll-feed
 
