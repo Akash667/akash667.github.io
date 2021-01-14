@@ -36,7 +36,7 @@ a{
    
 }
 
-.github,.twitter,.email,.telegram{
+.github,.twitter,.email,.telegram,.blog{
     max-width: 500px;
     /* min-width: 7%;  */
    
@@ -63,6 +63,10 @@ a{
 .telegram  a{
     position: relative;
     right: 6px;
+}
+
+.blog a{
+    
 }
 .main-container > div:hover{
     transform: scale(1.2);
