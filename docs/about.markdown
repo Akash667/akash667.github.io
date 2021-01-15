@@ -1,7 +1,6 @@
 ---
-layout: categories
-title: Hmm
+layout: about
+title: About
 permalink: /about/
 ---
-
-This is akash
+I'm a CS student trying my best to do some good using my skills.
