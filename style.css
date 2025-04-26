@@ -1,14 +1,8 @@
 :root {
-    --text-color: #2D3748;
-    --background-color: #F7FAFC;
-    --accent-color: #718096;
-    --link-color: #4A5568;
-    --link-hover-color: #805AD5;
-    --border-color: #E2E8F0;
-    --pastel-purple: #B794F4;
-    --pastel-blue: #90CDF4;
-    --pastel-pink: #FBB6CE;
-    --pastel-green: #9AE6B4;
+    --primary-color: #FFB6C1;
+    --secondary-color: #98FB98;
+    --text-color: #333;
+    --background-color: #FFF;
 }
 
 * {
@@ -18,233 +12,147 @@
 }
 
 body {
-    font-family: 'IBM Plex Mono', monospace;
-    font-weight: 300;
+    font-family: 'Space Grotesk', sans-serif;
     line-height: 1.6;
     color: var(--text-color);
     background-color: var(--background-color);
-    -webkit-font-smoothing: antialiased;
-}
-
-/* Header */
-.site-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    background: var(--background-color);
-    z-index: 100;
-    border-bottom: 1px solid var(--border-color);
-}
-
-.main-nav {
+    padding: 2rem;
     max-width: 800px;
     margin: 0 auto;
-    padding: 2rem 1rem;
+}
+
+main {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
-.logo {
-    font-size: 1.25rem;
-    font-weight: 500;
-    color: var(--text-color);
-    text-decoration: none;
-    letter-spacing: -0.5px;
+header {
+    margin-bottom: 2rem;
 }
 
-.nav-links {
-    display: flex;
-    gap: 2rem;
-}
-
-.nav-links a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 0.9rem;
-    text-transform: lowercase;
-    transition: color 0.2s ease;
-    letter-spacing: -0.3px;
-}
-
-.nav-links a:hover {
-    color: var(--pastel-purple);
-}
-
-/* Main Content */
-.content {
-    max-width: 800px;
-    margin: 8rem auto 4rem;
-    padding: 0 1rem;
-}
-
-.blog-posts {
-    display: grid;
-    gap: 4rem;
-}
-
-.post-card {
-    border-bottom: 1px solid var(--border-color);
-    padding-bottom: 2rem;
-}
-
-.post-date {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--accent-color);
-    margin-bottom: 0.5rem;
-    letter-spacing: -0.3px;
-}
-
-.post-content h2 {
-    font-size: 1.5rem;
-    font-weight: 400;
+h1 {
+    font-size: 2.5rem;
     margin-bottom: 1rem;
-    letter-spacing: -0.5px;
+    color: var(--primary-color);
 }
 
-.post-content h2 a {
-    color: var(--text-color);
+h1 a {
     text-decoration: none;
-    transition: color 0.2s ease;
+    color: inherit;
 }
 
-.post-content h2 a:hover {
-    color: var(--pastel-purple);
-}
-
-.post-excerpt {
-    font-size: 1rem;
-    color: var(--accent-color);
-    letter-spacing: -0.3px;
-}
-
-/* Footer */
-.site-footer {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 4rem 1rem;
-    text-align: center;
-    border-top: 1px solid var(--border-color);
-}
-
-.social-links {
+nav {
     display: flex;
-    justify-content: center;
-    gap: 2rem;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
 }
 
-.social-links a {
-    color: var(--text-color);
+nav a {
     text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+.posts {
+    flex: 1;
+}
+
+.post {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background-color: var(--secondary-color);
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+}
+
+.post:hover {
+    transform: translateY(-2px);
+}
+
+.post time {
+    display: block;
+    color: #666;
+    margin-bottom: 0.5rem;
     font-size: 0.9rem;
-    text-transform: lowercase;
-    transition: color 0.2s ease;
-    letter-spacing: -0.3px;
 }
 
-.social-links a:hover {
-    color: var(--pastel-purple);
+.post h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
-/* Responsive Design */
-@media (max-width: 600px) {
-    .main-nav {
-        padding: 1.5rem 1rem;
-    }
-    
-    .content {
-        margin-top: 6rem;
-    }
-    
-    .nav-links {
-        gap: 1.5rem;
-    }
-    
-    .social-links {
-        gap: 1.5rem;
-    }
-}
-
-/* Selection Styling */
-::selection {
-    background: var(--pastel-purple);
-    color: white;
-}
-
-html,body{
-    height: 100%;
-    margin: 0;
-    background-color: black;
-    color: white;
-    font-family: 'Press Start 2P', cursive;
-    text-rendering: geometricPrecision;
-}
-
-.noSelect {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-
-a{
+.post h2 a {
     text-decoration: none;
-    color: white;
-    font-size: 40px;
-    margin-left: 10px;
-    
+    color: var(--text-color);
+    transition: color 0.3s ease;
 }
 
-.main-container{
-    height: 100%;
+.post h2 a:hover {
+    color: var(--primary-color);
+}
+
+.post p {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+}
+
+footer {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid #eee;
+}
+
+.social {
     display: flex;
-    align-items: center;
+    gap: 1.5rem;
     justify-content: center;
-    flex-direction: row;
-}
-.main-container  img{
-    filter: invert(1);
-   
 }
 
-.github,.twitter,.email,.telegram,.blog{
-    max-width: 500px;
-    /* min-width: 7%;  */
-   
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 1% 1%;
-    border: 2px solid white;
-    border-radius: 20px;
-    margin: 10px;
-    transform: scale(1);
-    transition: 0.5s ease;
+.social a {
+    text-decoration: none;
+    color: var(--text-color);
+    transition: color 0.3s ease;
+    font-size: 0.9rem;
 }
 
-.email  a{
-    position: relative;
-    right: 5px;
-}
-.github a{
-    position: relative;
-    right: 4px;
+.social a:hover {
+    color: var(--primary-color);
 }
 
-.telegram  a{
-    position: relative;
-    right: 6px;
-}
-
-.blog a{
+/* Responsive design */
+@media (max-width: 600px) {
+    body {
+        padding: 1rem;
+    }
     
-}
-.main-container > div:hover{
-    transform: scale(1.2);
-    transition:  0.4s ease-in-out;
+    h1 {
+        font-size: 2rem;
+    }
+    
+    nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .social {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: center;
+    }
+    
+    .post {
+        padding: 1rem;
+    }
 }
 
+/* Selection styling */
+::selection {
+    background: var(--primary-color);
+    color: white;
+} 
