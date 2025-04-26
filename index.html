@@ -3,67 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>akash667 - Recipes & More</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>akash667</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
     <link rel="icon" href="https://img.icons8.com/ios-filled/50/000000/circled-a.png" type="image/gif" sizes="16x16">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="site-header">
         <nav class="main-nav">
-            <div class="logo">
-                <a href="/">akash667</a>
+            <a href="/" class="logo">akash667</a>
+            <div class="nav-links">
+                <a href="/recipes">recipes</a>
+                <a href="/random">random</a>
+                <a href="/about">about</a>
             </div>
-            <ul class="nav-links">
-                <li><a href="/">Home</a></li>
-                <li><a href="/recipes">Recipes</a></li>
-                <li><a href="/random">Random</a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
         </nav>
     </header>
 
     <main class="content">
-        <div class="container">
-            <div class="blog-posts">
-                <article class="post-card">
-                    <div class="post-image">
-                        <img src="/images/placeholder.jpg" alt="Recipe image">
-                    </div>
-                    <div class="post-content">
-                        <h2><a href="/recipes/recipe-title">Delicious Recipe Title</a></h2>
-                        <p class="post-meta">Posted on <time datetime="2024-04-26">April 26, 2024</time></p>
-                        <p class="post-excerpt">A brief description of the recipe and what makes it special...</p>
-                        <a href="/recipes/recipe-title" class="read-more">Read More</a>
-                    </div>
-                </article>
-                <!-- More post cards will go here -->
-            </div>
-
-            <aside class="sidebar">
-                <div class="widget">
-                    <h3>Categories</h3>
-                    <ul class="category-list">
-                        <li><a href="/recipes">Recipes</a></li>
-                        <li><a href="/random">Random Thoughts</a></li>
-                    </ul>
+        <div class="blog-posts">
+            <article class="post-card">
+                <div class="post-content">
+                    <time class="post-date">2024-04-26</time>
+                    <h2><a href="/recipes/recipe-title">Recipe Title</a></h2>
+                    <p class="post-excerpt">A brief description of the recipe and what makes it special...</p>
                 </div>
-                <div class="widget">
-                    <h3>About Me</h3>
-                    <p>Welcome to my blog where I share my favorite recipes and random thoughts about life, tech, and everything in between.</p>
-                </div>
-            </aside>
+            </article>
+            <!-- More post cards will go here -->
         </div>
     </main>
 
     <footer class="site-footer">
         <div class="social-links">
-            <a class="noSelect" target="_blank" href="mailto:akashrawatcats@gmail.com"><img src="/icons/important-mail.png" alt="Email"/></a>
-            <a class="noSelect" target="_blank" href="https://github.com/Akash667"><img src="/icons/github.png" alt="GitHub"/></a>
-            <a class="noSelect" target="_blank" href="https://twitter.com/nocashirl"><img src="/icons/twitter.png" alt="Twitter"/></a>
-            <a class="noSelect" target="_blank" href="https://t.me/akashirl"><img src="https://img.icons8.com/dotty/80/000000/telegram-app.png" alt="Telegram"/></a>
+            <a href="mailto:akashrawatcats@gmail.com">email</a>
+            <a href="https://github.com/Akash667">github</a>
+            <a href="https://twitter.com/nocashirl">twitter</a>
+            <a href="https://t.me/akashirl">telegram</a>
         </div>
-        <p>&copy; 2024 akash667. All rights reserved.</p>
     </footer>
 </body>
 </html>
