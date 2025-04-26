@@ -1,9 +1,14 @@
 :root {
-    --text-color: #1a1a1a;
-    --background-color: #ffffff;
-    --accent-color: #666666;
-    --link-color: #1a1a1a;
-    --link-hover-color: #666666;
+    --text-color: #2D3748;
+    --background-color: #F7FAFC;
+    --accent-color: #718096;
+    --link-color: #4A5568;
+    --link-hover-color: #805AD5;
+    --border-color: #E2E8F0;
+    --pastel-purple: #B794F4;
+    --pastel-blue: #90CDF4;
+    --pastel-pink: #FBB6CE;
+    --pastel-green: #9AE6B4;
 }
 
 * {
@@ -13,7 +18,7 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'IBM Plex Mono', monospace;
     font-weight: 300;
     line-height: 1.6;
     color: var(--text-color);
@@ -29,6 +34,7 @@ body {
     right: 0;
     background: var(--background-color);
     z-index: 100;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .main-nav {
@@ -45,6 +51,7 @@ body {
     font-weight: 500;
     color: var(--text-color);
     text-decoration: none;
+    letter-spacing: -0.5px;
 }
 
 .nav-links {
@@ -58,10 +65,11 @@ body {
     font-size: 0.9rem;
     text-transform: lowercase;
     transition: color 0.2s ease;
+    letter-spacing: -0.3px;
 }
 
 .nav-links a:hover {
-    color: var(--link-hover-color);
+    color: var(--pastel-purple);
 }
 
 /* Main Content */
@@ -77,7 +85,7 @@ body {
 }
 
 .post-card {
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 2rem;
 }
 
@@ -86,12 +94,14 @@ body {
     font-size: 0.8rem;
     color: var(--accent-color);
     margin-bottom: 0.5rem;
+    letter-spacing: -0.3px;
 }
 
 .post-content h2 {
     font-size: 1.5rem;
     font-weight: 400;
     margin-bottom: 1rem;
+    letter-spacing: -0.5px;
 }
 
 .post-content h2 a {
@@ -101,12 +111,13 @@ body {
 }
 
 .post-content h2 a:hover {
-    color: var(--link-hover-color);
+    color: var(--pastel-purple);
 }
 
 .post-excerpt {
     font-size: 1rem;
     color: var(--accent-color);
+    letter-spacing: -0.3px;
 }
 
 /* Footer */
@@ -115,6 +126,7 @@ body {
     margin: 0 auto;
     padding: 4rem 1rem;
     text-align: center;
+    border-top: 1px solid var(--border-color);
 }
 
 .social-links {
@@ -129,10 +141,11 @@ body {
     font-size: 0.9rem;
     text-transform: lowercase;
     transition: color 0.2s ease;
+    letter-spacing: -0.3px;
 }
 
 .social-links a:hover {
-    color: var(--link-hover-color);
+    color: var(--pastel-purple);
 }
 
 /* Responsive Design */
@@ -152,6 +165,12 @@ body {
     .social-links {
         gap: 1.5rem;
     }
+}
+
+/* Selection Styling */
+::selection {
+    background: var(--pastel-purple);
+    color: white;
 }
 
 html,body{
