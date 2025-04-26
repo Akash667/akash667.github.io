@@ -1,34 +1,69 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="icon" href="https://img.icons8.com/ios-filled/50/000000/circled-a.png" type="image/gif" sizes="16x16">
-    <title>akash667</title>
-    <script src="myscript.js"></script>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>akash667 - Recipes & More</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="https://img.icons8.com/ios-filled/50/000000/circled-a.png" type="image/gif" sizes="16x16">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header class="site-header">
+        <nav class="main-nav">
+            <div class="logo">
+                <a href="/">akash667</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/recipes">Recipes</a></li>
+                <li><a href="/random">Random</a></li>
+                <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
 
-    <div class="main-container">
-            <div class="email">
-                
-                <a class="noSelect" target="_blank" href="mailto:akashrawatcats@gmail.com"><img src="/icons/important-mail.png"/></a>
+    <main class="content">
+        <div class="container">
+            <div class="blog-posts">
+                <article class="post-card">
+                    <div class="post-image">
+                        <img src="/images/placeholder.jpg" alt="Recipe image">
+                    </div>
+                    <div class="post-content">
+                        <h2><a href="/recipes/recipe-title">Delicious Recipe Title</a></h2>
+                        <p class="post-meta">Posted on <time datetime="2024-04-26">April 26, 2024</time></p>
+                        <p class="post-excerpt">A brief description of the recipe and what makes it special...</p>
+                        <a href="/recipes/recipe-title" class="read-more">Read More</a>
+                    </div>
+                </article>
+                <!-- More post cards will go here -->
             </div>
-            <div class="github">
-                
-                <a class="noSelect" target="_blank" href="https://github.com/Akash667"><img src="/icons/github.png"/></a>
-            </div>
-            <div class="twitter">
-                
-                <a class="noSelect" target="_blank" href="https://twitter.com/nocashirl"><img src="/icons/twitter.png"/></a>
-            </div>
-            <div class="telegram">
-                <a class="noSelect" target="_blank" href="https://t.me/akashirl"><img src="https://img.icons8.com/dotty/80/000000/telegram-app.png"/></a>
-            </div>
-            <div class="telegram">
-                <a class="noSelect" target="_blank" href="./blog"><img src="/icons/blog.png"/></a>
-            </div>
-    </div>
+
+            <aside class="sidebar">
+                <div class="widget">
+                    <h3>Categories</h3>
+                    <ul class="category-list">
+                        <li><a href="/recipes">Recipes</a></li>
+                        <li><a href="/random">Random Thoughts</a></li>
+                    </ul>
+                </div>
+                <div class="widget">
+                    <h3>About Me</h3>
+                    <p>Welcome to my blog where I share my favorite recipes and random thoughts about life, tech, and everything in between.</p>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="social-links">
+            <a class="noSelect" target="_blank" href="mailto:akashrawatcats@gmail.com"><img src="/icons/important-mail.png" alt="Email"/></a>
+            <a class="noSelect" target="_blank" href="https://github.com/Akash667"><img src="/icons/github.png" alt="GitHub"/></a>
+            <a class="noSelect" target="_blank" href="https://twitter.com/nocashirl"><img src="/icons/twitter.png" alt="Twitter"/></a>
+            <a class="noSelect" target="_blank" href="https://t.me/akashirl"><img src="https://img.icons8.com/dotty/80/000000/telegram-app.png" alt="Telegram"/></a>
+        </div>
+        <p>&copy; 2024 akash667. All rights reserved.</p>
+    </footer>
 </body>
 </html>
