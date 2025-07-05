@@ -21,7 +21,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Blog
+            Blog!
           </a>
         </div>
       </main>
