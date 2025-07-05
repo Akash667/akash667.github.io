@@ -32,13 +32,16 @@
   flex-direction: column;
   gap: 32px;
   grid-row-start: 2;
+  justify-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
-.main ol {
-  font-family: var(--font-geist-mono);
+.main h1 {
+  font-family: var(--font-space-grotesk);
   padding-left: 0;
   margin: 0;
-  font-size: 14px;
+  font-size: 50px;
   line-height: 24px;
   letter-spacing: -0.01em;
   list-style-position: inside;
@@ -87,10 +90,6 @@ a.primary {
   gap: 8px;
 }
 
-a.secondary {
-  border-color: var(--gray-alpha-200);
-  min-width: 158px;
-}
 
 .footer {
   grid-row-start: 3;
@@ -112,11 +111,6 @@ a.secondary {
 @media (hover: hover) and (pointer: fine) {
   a.primary:hover {
     background: var(--button-primary-hover);
-    border-color: transparent;
-  }
-
-  a.secondary:hover {
-    background: var(--button-secondary-hover);
     border-color: transparent;
   }
 
@@ -148,10 +142,6 @@ a.secondary {
     font-size: 14px;
     height: 40px;
     padding: 0 16px;
-  }
-
-  a.secondary {
-    min-width: auto;
   }
 
   .footer {
