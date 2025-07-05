@@ -12,8 +12,7 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
         </ol> */}
-       <h1>Welcome! this is Akash 
-</h1> 
+       <h1>Welcome! this is Akash</h1> 
         <div className={styles.ctas}>
           <a
             className={styles.primary}
