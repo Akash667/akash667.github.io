@@ -5,18 +5,18 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-        <h1>Hi! I am Akash</h1>
+        <h1 className={styles.fadeInUp} >Hi! I am Akash</h1>
       </main>
-      <div   className={styles.oneliner}>
+      <div className={`${styles.oneliner} ${styles.fadeInLeft}`}>
         I Create Pipelines on the Cloud
       </div>
-      <div  className={styles.description} >
-        R&D Engineer @ <a href="https://www.nokia.com">Nokia</a>, building E2E testing pipelines. I like working on Kuberetes and the cloud.
+      <div  className={`${styles.description} ${styles.fadeIn}`}>
+        R&D Engineer @ <a href="https://www.nokia.com">Nokia</a>, building E2E testing pipelines. I like working on all things cloud and Kuberetes.
       </div>
       <div className={styles.ctas}>
         <a
           className={styles.primary}
-          href="#"
+          href="/blog"
           target="_blank"
           rel="noopener noreferrer"
         >
