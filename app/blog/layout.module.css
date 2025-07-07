@@ -1,5 +1,7 @@
-:root {
-  --primary-color: #ffb6c1;
+
+
+.blog{
+    --primary-color: #ffb6c1;
   --secondary-color: #98fb98;
   --text-color: #333;
   --background-color: #fff;
