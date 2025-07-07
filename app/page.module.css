@@ -7,31 +7,21 @@
   --button-secondary-hover: #f2f2f2;
 
   display: grid;
-  grid-template-rows: 20px 1fr 20px;
-  align-items: center;
-  justify-items: center;
+  /* grid-template-rows: repeat(6, 1fr); */
+  grid-auto-rows: 1fr;
+  grid-template-columns: 3fr 1fr;
+  justify-items: start;
   min-height: 100svh;
-  padding: 80px;
-  gap: 64px;
-  font-family: var(--font-geist-sans);
-}
-
-@media (prefers-color-scheme: dark) {
-  .page {
-    --gray-rgb: 255, 255, 255;
-    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
-    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
-
-    --button-primary-hover: #ccc;
-    --button-secondary-hover: #1a1a1a;
-  }
+  padding: 10svh;
+  gap: 2svh;
+  font-family: var(---font-space-grotesk);
 }
 
 .main {
   display: flex;
-  flex-direction: column;
-  gap: 32px;
-  grid-row-start: 2;
+  flex-direction: row;
+  gap: 2svh;
+  grid-row-start: 1;
   justify-items: center;
   justify-content: center;
   align-items: center;
@@ -41,7 +31,7 @@
   font-family: var(--font-space-grotesk);
   padding-left: 0;
   margin: 0;
-  font-size: 50px;
+  font-size: 30px;
   line-height: 50px;
   letter-spacing: -0.01em;
   list-style-position: inside;
@@ -51,17 +41,27 @@
   margin-bottom: 8px;
 }
 
-.main code {
-  font-family: inherit;
-  background: var(--gray-alpha-100);
-  padding: 2px 4px;
-  border-radius: 4px;
-  font-weight: 600;
+.oneliner {
+  font-family: var(--font-space-grotesk);
+  font-size: 40px;
+  font-weight: 300;
+  grid-column-start: 1;
+}
+
+.description{
+  font-family: var(--font-space-grotesk);
+  font-size: 25px;
+  font-weight: 300;
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 1;
 }
 
 .ctas {
   display: flex;
   gap: 16px;
+  align-self: end;
+  grid-column-start: 1;
 }
 
 .ctas a {
@@ -92,9 +92,13 @@ a.primary {
 
 
 .footer {
-  grid-row-start: 3;
+  grid-row-start: 6;
   display: flex;
   gap: 24px;
+  align-self: flex-end;
+  justify-self: center;
+  grid-column-start: 1;
+  grid-column-end: 3;
 }
 
 .footer a {
@@ -154,5 +158,17 @@ a.primary {
 @media (prefers-color-scheme: dark) {
   .logo {
     filter: invert();
+  }
+}
+
+
+@media (prefers-color-scheme: dark) {
+  .page {
+    --gray-rgb: 255, 255, 255;
+    --gray-alpha-200: rgba(var(--gray-rgb), 0.145);
+    --gray-alpha-100: rgba(var(--gray-rgb), 0.06);
+
+    --button-primary-hover: #ccc;
+    --button-secondary-hover: #1a1a1a;
   }
 }

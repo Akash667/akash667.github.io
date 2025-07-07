@@ -5,38 +5,30 @@ export default function Home() {
   return (
     <div className={styles.page}>
       <main className={styles.main}>
-
-        {/* <ol>
-          <li>
-            Get started by editing <code>app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol> */}
-       <h1>Welcome! this is Akash</h1> 
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="#"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Blog!
-          </a>
-        </div>
+        <h1>Hi! I am Akash</h1>
       </main>
+      <div   className={styles.oneliner}>
+        I Create Pipelines on the Cloud
+      </div>
+      <div  className={styles.description} >
+        R&D Engineer @ <a href="https://www.nokia.com">Nokia</a>, building E2E testing pipelines. I like working on Kuberetes and the cloud.
+      </div>
+      <div className={styles.ctas}>
+        <a
+          className={styles.primary}
+          href="#"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Blog
+        </a>
+      </div>
       <footer className={styles.footer}>
         <a
           href="https://github.com/Akash667"
           target="_blank"
           rel="noopener noreferrer"
         >
-          {/* <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          /> */}
           GitHub
         </a>
         <a
@@ -44,13 +36,6 @@ export default function Home() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          {/* <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          /> */}
           LinkedIn
         </a>
       </footer>
