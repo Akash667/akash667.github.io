@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={` ${spaceGrotesk.variable}`}>
+      <body className={`${spaceGrotesk.variable}`}>
         {children}
       </body>
     </html>

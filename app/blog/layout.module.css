@@ -36,3 +36,8 @@ nav.navigation a:hover {
 .postList {
   grid-row-start: 2;
 }
+
+.childrenWrapper {
+  /* Your global styles for all children */
+  padding:  20svh  20svw 0svh 20svw;
+}

@@ -19,23 +19,21 @@
 }
 
 .main {
-  display: flex;
-  flex-direction: row;
+  text-align: center;
   gap: 2svh;
   grid-row-start: 1;
-  justify-items: center;
-  justify-content: center;
+  display:flex;
   align-items: center;
+  justify-content: center;
 }
 
 .main h1 {
   font-family: var(--font-space-grotesk);
-  padding-left: 0;
-  margin: 0;
   font-size: 30px;
   line-height: 50px;
   letter-spacing: -0.01em;
-  list-style-position: inside;
+  
+
 }
 
 .main li:not(:last-of-type) {
