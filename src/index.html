@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>Akash R.</title>
+<meta name="description" content="SDET working on StarlingX, an open-source Kubernetes platform for edge clouds.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jersey+20&family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/base.css">
+<link rel="stylesheet" href="/css/home.css">
+</head>
+<body class="home">
+  <canvas id="cluster" aria-hidden="true"></canvas>
+
+  <header class="top">
+    <a class="logo" href="/"><svg data-sprite="heart" aria-hidden="true"></svg>akash r.</a>
+    <nav>
+      <a href="/objects/">objects</a>
+    </nav>
+  </header>
+
+  <main class="hero">
+    <p class="hello">Hi! I am <span>Akash</span><i class="cursor" aria-hidden="true"></i></p>
+    <h1>I test <em>Kubernetes</em><br>at the edge</h1>
+    <svg id="cluster-diagram" class="diagram" role="img" aria-label="A pixel-art Kubernetes cluster: a control plane scheduling pods onto three worker nodes"></svg>
+    <p class="description">
+      SDET @ <a href="https://www.windriver.com">Wind River</a>, working on
+      <a href="https://www.starlingx.io">StarlingX</a>, an open-source Kubernetes platform for edge clouds.
+      I spend my days standing up clusters, breaking them on purpose, and making sure they come back healthy.
+    </p>
+  </main>
+
+  <section class="tiles" aria-label="Elsewhere">
+    <a class="tile mint" href="https://github.com/Akash667" target="_blank" rel="noopener noreferrer">
+      <svg data-sprite="code" aria-hidden="true"></svg>
+      <b>GitHub</b>
+      <small>code &amp; tinkering</small>
+    </a>
+    <a class="tile sky-tile" href="https://www.linkedin.com/in/akash667/" target="_blank" rel="noopener noreferrer">
+      <svg data-sprite="case" aria-hidden="true"></svg>
+      <b>LinkedIn</b>
+      <small>the work stuff</small>
+    </a>
+  </section>
+
+  <footer class="foot">status: <i>Ready</i> · akashirl.me</footer>
+
+  <script src="/js/pixels.js" defer></script>
+  <script src="/js/cluster-bg.js" defer></script>
+</body>
+</html>

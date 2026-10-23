@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# akashirl.me
 
-## Getting Started
+Plain HTML/CSS site with one small build script. Deployed to GitHub Pages by
+`.github/workflows/publish.yaml` on every push to `main`.
 
-First, run the development server:
-
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+src/           static files, copied to the site as-is (home page, CSS, 404, objects page)
+posts/         blog posts as markdown (blog is off for now, see BLOG in build.mjs)
+photos/        original photos for the objects page
+tools/         background-removal tool that turns photos into objects for /objects/
+build.mjs      builds everything into out/
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Develop
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev     # http://localhost:3000, rebuilds when src/ or posts/ change
+npm run build   # writes out/
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Write a post
 
-## Learn More
+The blog is parked: set `BLOG = true` in `build.mjs` to publish `/blog/` again.
 
-To learn more about Next.js, take a look at the following resources:
+Add `posts/<slug>.md` with frontmatter:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```markdown
+---
+title: My post
+date: 2026-10-23
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Markdown here.
+```
 
-## Deploy on Vercel
+Posts are listed newest first (by `date`), then by file name.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Add objects
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+`/objects/` is a three.js page where cut-out photos of random objects lie on a table and can be dragged around.
+
+1. Put photos in `photos/`.
+2. `cd tools && npm install && npm run cutout`. This removes the backgrounds, writes cut-outs
+   to `src/objects/objects/` and updates `src/objects/objects.json`. The first run downloads the model.
+3. Optionally edit `title` and `size` (real longest side in cm) in `src/objects/objects.json`.

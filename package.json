@@ -1,24 +1,13 @@
 {
-  "name": "tinkering",
-  "version": "0.1.0",
+  "name": "akash667.github.io",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "node build.mjs --serve",
+    "build": "node build.mjs"
   },
   "dependencies": {
     "gray-matter": "^4.0.3",
-    "marked": "^16.1.1",
-    "next": "15.3.5",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
-  },
-  "devDependencies": {
-    "@types/node": "^20",
-    "@types/react": "^19",
-    "@types/react-dom": "^19",
-    "typescript": "^5"
+    "marked": "^16.1.1"
   }
 }

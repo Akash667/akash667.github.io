@@ -1,0 +1,18 @@
+[
+  {
+    "id": "geist-witty-wit",
+    "title": "Geist Witty Wit",
+    "src": "objects/geist-witty-wit.png",
+    "w": 297,
+    "h": 596,
+    "size": 17
+  },
+  {
+    "id": "pizza",
+    "title": "Pizza, half & half",
+    "src": "objects/pizza.png",
+    "w": 638,
+    "h": 499,
+    "size": 34
+  }
+]

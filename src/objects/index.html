@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Objects · Akash R.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f2eee6; --ink: #1d1c1a; --dim: #8c877d; --line: rgba(0,0,0,.12);
+    --mono: 'DM Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg: #212123; --ink: #ecebe6; --dim: #8b887f; --line: rgba(255,255,255,.14); }
+  }
+  :root[data-theme="dark"] { --bg: #212123; --ink: #ecebe6; --dim: #8b887f; --line: rgba(255,255,255,.14); }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; overflow: hidden; }
+  body { background: var(--bg); color: var(--ink); font: 11px/1.45 var(--mono); -webkit-font-smoothing: antialiased; user-select: none; -webkit-user-select: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 4px 0; cursor: pointer; }
+  #gl { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; outline: none; }
+  .ui { position: fixed; z-index: 5; display: flex; gap: 14px; align-items: baseline; }
+  .tl { top: 16px; left: 16px; letter-spacing: .04em; }
+  .tr { top: 16px; right: 16px; color: var(--dim); }
+  .bl { bottom: 14px; left: 16px; }
+  .br { bottom: 14px; right: 16px; }
+  nav button { color: var(--dim); }
+  nav button[aria-pressed="true"] { color: var(--ink); }
+  nav button[aria-pressed="true"]::before { content: '▸ '; }
+  button:hover { color: var(--ink); }
+  .tl a { color: var(--dim); text-decoration: none; }
+  .tl a:hover { color: var(--ink); }
+  .crumb { margin-left: -8px; }
+  #tag { position: fixed; z-index: 6; pointer-events: none; padding: 2px 6px; background: var(--ink); color: var(--bg); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; opacity: 0; transition: opacity .15s; white-space: nowrap; }
+  #caption { position: fixed; z-index: 6; left: 0; right: 0; bottom: 48px; text-align: center; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; opacity: 0; transition: opacity .3s; pointer-events: none; }
+  #caption small { display: block; color: var(--dim); font-size: 10px; margin-top: 4px; text-transform: none; letter-spacing: .02em; }
+  #loading { position: fixed; inset: 0; display: grid; place-items: center; color: var(--dim); pointer-events: none; transition: opacity .4s; }
+  @media (max-width: 600px) { .tr { display: none; } }
+</style>
+</head>
+<body>
+<canvas id="gl" tabindex="0" aria-label="A table of random objects. Drag to move them, click one to pick it up."></canvas>
+<div id="loading">…</div>
+<div class="ui tl"><a href="/">akash r.</a><span class="crumb">/ objects</span></div>
+<div class="ui tr">drag to move · click to pick up · scroll to turn</div>
+<nav class="ui bl" id="arrange" aria-label="Arrange">
+  <button data-k="scatter" aria-pressed="true">scatter</button>
+  <button data-k="grid" aria-pressed="false">grid</button>
+  <button data-k="pile" aria-pressed="false">pile</button>
+</nav>
+<div class="ui br"><button id="theme" aria-label="Toggle dark mode">dark</button></div>
+<div id="tag"></div>
+<div id="caption"></div>
+
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js" } }
+</script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
