@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -30,9 +31,6 @@ jobs:
 
       - name: Build site 🏗️
         run: npm run build
-
-      - name: List files after build
-        run: ls -la
 
       - name: Upload artifact 📡
         uses: actions/upload-pages-artifact@v3.0.1
