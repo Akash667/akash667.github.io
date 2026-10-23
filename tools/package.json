@@ -2,7 +2,8 @@
   "name": "object-cutout",
   "version": "1.0.0",
   "scripts": {
-    "cutout": "node cutout.mjs"
+    "cutout": "node cutout.mjs",
+    "favicon": "node favicon.mjs"
   },
   "dependencies": {
     "@imgly/background-removal-node": "^1.4.5",

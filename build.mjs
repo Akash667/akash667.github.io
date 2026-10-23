@@ -24,6 +24,9 @@ const blogPage = (title, body) => `<!doctype html>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 <title>${esc(title)}</title>
 <meta name="description" content="a lot of thoughts go on here">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,7 +104,7 @@ ${list}
 // A tiny static server that behaves like GitHub Pages: folders serve index.html,
 // folder URLs without a trailing slash redirect, unknown paths get 404.html.
 function serve(port = 3000) {
-  const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.webp': 'image/webp' };
+  const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.ico': 'image/x-icon' };
   http.createServer((req, res) => {
     const url = decodeURIComponent(new URL(req.url, 'http://x').pathname);
     let file = path.join(OUT, url);
