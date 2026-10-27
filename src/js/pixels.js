@@ -1,6 +1,6 @@
-// Pixel-art sprites and the hero cluster diagram. Each sprite is a grid of palette
-// letters drawn as SVG rects, so it stays crisp at any size and uses the page's
-// CSS colour variables.
+// Small pixel-art icons and the hero cluster diagram. Each icon is a grid of palette
+// letters drawn as SVG rects, so it stays crisp at any size; the diagram is plain vector
+// shapes. Both use the page's CSS colour variables.
 (() => {
   const PALETTE = {
     X: '--px-ink', w: '--cloud', s: '--cloud-shade', W: '--cloud', k: '--screen',
@@ -102,38 +102,42 @@
   const WORKERS_X = [26, 80, 134];          // worker centres; pipe columns sit at x-1..x
   const BUS = 27, WORKER_Y = 35, WORKER_W = 40, WORKER_H = 22;
 
-  // pipes: 4px dark casing with a 2px lavender core
-  const pipeV = (cx, y0, y1) => { pipes.append(rect(cx - 2, y0, 4, y1 - y0, '--px-ink')); };
-  const coreV = (cx, y0, y1) => { pipes.append(rect(cx - 1, y0, 2, y1 - y0, '--lav')); };
-  pipeV(80, CP.y + CP.h - 1, BUS + 3);
-  for (const cx of WORKERS_X) pipeV(cx, BUS - 1, WORKER_Y + 1);
-  pipes.append(rect(WORKERS_X[0] - 2, BUS - 1, WORKERS_X[2] - WORKERS_X[0] + 4, 4, '--px-ink'));
-  coreV(80, CP.y + CP.h - 1, BUS + 2);
-  for (const cx of WORKERS_X) coreV(cx, BUS, WORKER_Y + 1);
-  pipes.append(rect(WORKERS_X[0] - 1, BUS, WORKERS_X[2] - WORKERS_X[0] + 2, 2, '--lav'));
+  // Drawn as clean vector shapes (rounded boxes, hairline strokes), not pixel art.
+  scene.setAttribute('shape-rendering', 'geometricPrecision');
+  const shape = (x, y, w, h, fillVar, { rx = 0, stroke, strokeWidth = 0.6 } = {}) => {
+    const r = rect(x, y, w, h, fillVar);
+    if (rx) r.setAttribute('rx', rx);
+    if (stroke) { r.style.stroke = `var(${stroke})`; r.style.strokeWidth = strokeWidth; }
+    return r;
+  };
+
+  // pipes: thin lavender lines; packets ride centred on them
+  const pipe = (x, y, w, h) => pipes.append(shape(x, y, w, h, '--lav', { rx: 0.5 }));
+  pipes.style.opacity = 0.55;
+  pipe(79.5, CP.y + CP.h, 1, BUS + 1 - (CP.y + CP.h));
+  for (const cx of WORKERS_X) pipe(cx - 0.5, BUS + 0.5, 1, WORKER_Y - BUS - 0.5);
+  pipe(WORKERS_X[0] - 0.5, BUS + 0.5, WORKERS_X[2] - WORKERS_X[0] + 1, 1);
 
   // control plane: two racks with status lights
-  boxes.append(rect(CP.x, CP.y, CP.w, CP.h, '--px-ink'));
-  boxes.append(rect(CP.x + 1, CP.y + 1, CP.w - 2, CP.h - 2, '--lav'));
-  boxes.append(rect(CP.x + 4, CP.y + 4, CP.w - 15, 3, '--screen'));
-  boxes.append(rect(CP.x + 4, CP.y + 9, CP.w - 15, 3, '--screen'));
-  const cpLights = [rect(CP.x + CP.w - 8, CP.y + 4, 3, 3, '--mint-deep'), rect(CP.x + CP.w - 8, CP.y + 9, 3, 3, '--mint-deep')];
+  boxes.append(shape(CP.x, CP.y, CP.w, CP.h, '--node', { rx: 2.5, stroke: '--lav', strokeWidth: 0.7 }));
+  boxes.append(shape(CP.x + 4, CP.y + 4, CP.w - 15, 2.5, '--slot', { rx: 1 }));
+  boxes.append(shape(CP.x + 4, CP.y + 8.5, CP.w - 15, 2.5, '--slot', { rx: 1 }));
+  const cpLights = [shape(CP.x + CP.w - 8, CP.y + 4, 2.5, 2.5, '--led', { rx: 1.25 }), shape(CP.x + CP.w - 8, CP.y + 8.5, 2.5, 2.5, '--led', { rx: 1.25 })];
   boxes.append(...cpLights);
 
   // workers: 3×2 pod slots and a Ready light
   const workers = WORKERS_X.map((cx) => {
     const bx = cx - WORKER_W / 2;
-    boxes.append(rect(bx, WORKER_Y, WORKER_W, WORKER_H, '--px-ink'));
-    boxes.append(rect(bx + 1, WORKER_Y + 1, WORKER_W - 2, WORKER_H - 2, '--node'));
+    boxes.append(shape(bx, WORKER_Y, WORKER_W, WORKER_H, '--node', { rx: 2.5, stroke: '--node-edge', strokeWidth: 0.7 }));
     const slots = [];
     for (let row = 0; row < 2; row++) {
       for (let col = 0; col < 3; col++) {
-        const r = rect(bx + 3 + col * 12, WORKER_Y + 5 + row * 8, 9, 6, '--slot');
+        const r = shape(bx + 3.5 + col * 11.5, WORKER_Y + 6 + row * 7.5, 9, 5, '--slot', { rx: 1.2 });
         boxes.append(r);
         slots.push({ r, pod: null, born: 0 });
       }
     }
-    const light = rect(bx + WORKER_W - 5, WORKER_Y + 2, 2, 2, '--mint-deep');
+    const light = shape(bx + WORKER_W - 5, WORKER_Y + 2.5, 2, 2, '--led', { rx: 1 });
     boxes.append(light);
     return { cx, slots, light, flash: 0 };
   });
@@ -168,9 +172,9 @@
         fill(s.r, s.pod || '--slot');
         s.r.style.opacity = creating ? (tick % 4 < 2 ? 0.35 : 0.6) : 1;
       }
-      fill(w.light, tick < w.flash ? '--butter' : '--mint-deep');
+      fill(w.light, tick < w.flash ? '--butter' : '--led');
     }
-    cpLights.forEach((l, i) => fill(l, (Math.floor(tick / 6) + i) % 2 ? '--mint-deep' : '--screen'));
+    cpLights.forEach((l, i) => fill(l, (Math.floor(tick / 6) + i) % 2 ? '--led' : '--slot'));
   }
 
   // start with a few running pods
@@ -184,6 +188,7 @@
     if (tick % 16 === 0) {
       const k = Math.floor(Math.random() * workers.length);
       const el = rect(0, 0, 2, 2, pick(COLORS));
+      el.setAttribute('rx', 0.6);
       packets.append(el);
       live.push({ k, i: 0, el });
     }

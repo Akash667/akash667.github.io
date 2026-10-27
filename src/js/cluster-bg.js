@@ -1,20 +1,21 @@
-// Background: a pixel-art cluster. Nodes sit on a loose grid joined by network links;
+// Background: a cluster of servers. Nodes sit on a loose grid joined by network links;
 // traffic packets flow between them, pods get rescheduled to neighbours, and now and
-// then a node goes NotReady and its pods are evicted. Drawn at 1/SCALE resolution and
-// scaled up with `image-rendering: pixelated`.
+// then a node goes NotReady and its pods are evicted. The simulation runs on a coarse
+// grid (UNIT css px per step); drawing is crisp vector at full device resolution.
 (() => {
   const canvas = document.getElementById('cluster');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  const SCALE = 3;
-  const NODE_W = 12, NODE_H = 9;
-  const SLOTS = [[2, 2], [6, 2], [2, 5], [6, 5]]; // 3×2 pod slots inside a node
+  const UNIT = 3;                          // css px per simulation step
+  const NODE_W = 12, NODE_H = 9;           // node footprint on the grid, used for spacing
+  const BOX_W = 22, BOX_H = 14;            // drawn node size in css px
+  const SLOTS = [[4, 4], [9, 4], [4, 8], [9, 8]]; // pod positions inside a box, 4×2 px each
 
   const css = getComputedStyle(document.body);
   const v = (name) => css.getPropertyValue(name).trim();
   const COL = {
-    grid: v('--grid'), node: v('--node'), ink: v('--px-ink'), slot: v('--slot'),
-    ok: v('--mint-deep'), bad: v('--pink-deep'),
+    grid: v('--grid'), node: v('--node'), edge: v('--node-edge'), slot: v('--slot'),
+    ok: v('--led'), bad: v('--led-bad'),
     pods: ['--pink', '--sky', '--mint', '--butter', '--lav', '--peach'].map(v),
   };
   const pick = (a) => a[Math.floor(Math.random() * a.length)];
@@ -36,9 +37,11 @@
   }
 
   function layout() {
-    W = Math.ceil(innerWidth / SCALE);
-    H = Math.ceil(innerHeight / SCALE);
-    canvas.width = W; canvas.height = H;
+    W = Math.ceil(innerWidth / UNIT);
+    H = Math.ceil(innerHeight / UNIT);
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    canvas.width = Math.round(innerWidth * dpr); canvas.height = Math.round(innerHeight * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     const gap = Math.max(40, Math.round(Math.min(W, H) / 5));
     nodes = []; links = []; packets = [];
     let row = 0;
@@ -108,33 +111,48 @@
     }
   }
 
+  // A small, bright light with a tight halo.
+  function light(color, x, y, w, h, halo = 4) {
+    ctx.shadowColor = color; ctx.shadowBlur = halo;
+    ctx.fillStyle = color; ctx.fillRect(x, y, w, h);
+    ctx.shadowBlur = 0;
+  }
+  const box = (x, y, w, h, r) => {
+    ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(x, y, w, h, r); else ctx.rect(x, y, w, h);
+  };
+
   function draw() {
-    ctx.clearRect(0, 0, W, H);
-    ctx.fillStyle = COL.grid;
-    ctx.globalAlpha = 0.7;
-    for (const pts of links) for (let i = 0; i < pts.length; i += 2) ctx.fillRect(pts[i][0], pts[i][1], 1, 1);
-    ctx.globalAlpha = 0.75;
+    ctx.clearRect(0, 0, innerWidth, innerHeight);
+    const centre = (n) => [(n.x + NODE_W / 2) * UNIT, (n.y + NODE_H / 2) * UNIT];
+    // links: 1px hairlines, snapped to the pixel grid so they stay sharp
+    ctx.strokeStyle = COL.grid; ctx.lineWidth = 1;
+    ctx.beginPath();
+    for (const pts of links) {
+      const [a, b] = [pts[0], pts[pts.length - 1]];
+      ctx.moveTo(Math.round(a[0] * UNIT) + .5, Math.round(a[1] * UNIT) + .5);
+      ctx.lineTo(Math.round(b[0] * UNIT) + .5, Math.round(b[1] * UNIT) + .5);
+    }
+    ctx.stroke();
     for (const p of packets) {
       const [x, y] = p.pts[Math.min(p.i, p.pts.length - 1)];
-      ctx.fillStyle = p.color;
-      if (p.pod) ctx.fillRect(x - 1, y - 1, 3, 2); else ctx.fillRect(x, y, 1, 1);
+      const px = Math.round(x * UNIT), py = Math.round(y * UNIT);
+      if (p.pod) light(p.color, px - 2, py - 1, 4, 3, 5); else light(p.color, px - 1, py - 1, 2, 2, 4);
     }
-    ctx.globalAlpha = 1;
     for (const n of nodes) {
-      ctx.fillStyle = n.down ? COL.bad : COL.grid;
-      ctx.fillRect(n.x, n.y, NODE_W, NODE_H);
-      ctx.fillStyle = COL.node;
-      ctx.fillRect(n.x + 1, n.y + 1, NODE_W - 2, NODE_H - 2);
+      const [cx, cy] = centre(n);
+      const x = Math.round(cx - BOX_W / 2), y = Math.round(cy - BOX_H / 2);
+      box(x + .5, y + .5, BOX_W, BOX_H, 3);
+      ctx.fillStyle = COL.node; ctx.fill();
+      ctx.strokeStyle = n.down ? COL.bad : COL.edge; ctx.stroke();
       n.pods.forEach((p, i) => {
         const [sx, sy] = SLOTS[i];
         ctx.fillStyle = p || COL.slot;
-        ctx.globalAlpha = p ? 0.8 : 1;
-        ctx.fillRect(n.x + sx, n.y + sy, 3, 2);
-        ctx.globalAlpha = 1;
+        ctx.fillRect(x + sx, y + sy, 4, 2);
       });
       // status light: steady green when Ready, blinking pink when NotReady
-      ctx.fillStyle = n.down ? (tick % 6 < 3 ? COL.bad : COL.node) : COL.ok;
-      ctx.fillRect(n.x + 10, n.y + 2, 1, 1);
+      if (!n.down) light(COL.ok, x + BOX_W - 5, y + 3, 2, 2);
+      else if (tick % 6 < 3) light(COL.bad, x + BOX_W - 5, y + 3, 2, 2, 6);
     }
   }
 
