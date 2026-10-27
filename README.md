@@ -42,5 +42,5 @@ Posts are listed newest first (by `date`), then by file name.
 
 1. Put photos in `photos/`.
 2. `cd tools && npm install && npm run cutout`. This removes the backgrounds, writes cut-outs
-   to `src/objects/objects/` and updates `src/objects/objects.json`. The first run downloads the model.
+   to `src/objects/objects/` and updates `src/objects/objects.json`. `npm install` fetches the model (~130 MB); it runs locally.
 3. Optionally edit `title` and `size` (real longest side in cm) in `src/objects/objects.json`.
