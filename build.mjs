@@ -16,6 +16,7 @@ const SRC = path.join(root, 'src');
 const POSTS = path.join(root, 'posts');
 const OUT = path.join(root, 'out');
 const BLOG = false; // blog is parked for now; posts/ stays in the repo, set true to publish /blog/ again
+const SITE = 'https://akashirl.me';
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]);
 
@@ -74,18 +75,35 @@ export function build() {
   fs.rmSync(OUT, { recursive: true, force: true });
   fs.cpSync(SRC, OUT, { recursive: true });
   if (fs.existsSync(path.join(root, 'CNAME'))) fs.copyFileSync(path.join(root, 'CNAME'), path.join(OUT, 'CNAME'));
-  if (!BLOG) {
+  if (BLOG) buildBlog();
+  else {
     fs.rmSync(path.join(OUT, 'css', 'blog.css'));
     console.log('built out/ · blog off');
-    return;
   }
+  writeSitemap();
+}
 
+// Every built page (folders with an index.html) goes into sitemap.xml; robots.txt points at it.
+function writeSitemap() {
+  const pages = fs.readdirSync(OUT, { recursive: true })
+    .filter((f) => path.basename(f) === 'index.html')
+    .map((f) => `${SITE}/${path.dirname(f) === '.' ? '' : `${path.dirname(f).split(path.sep).join('/')}/`}`)
+    .sort();
+  write(path.join(OUT, 'sitemap.xml'), `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${pages.map((u) => `  <url><loc>${u}</loc></url>`).join('\n')}
+</urlset>
+`);
+  write(path.join(OUT, 'robots.txt'), `User-agent: *\nAllow: /\n\nSitemap: ${SITE}/sitemap.xml\n`);
+}
+
+function buildBlog() {
   const posts = readPosts();
   const list = posts.map((p) => `      <li>
         <a class="listTitle" href="/blog/${p.slug}/">${esc(p.title)}</a>
         <div>${esc(p.content.trim().slice(0, 100))}...</div>
       </li>`).join('\n');
-  write(path.join(OUT, 'blog', 'index.html'), blogPage('Blog · Akash R.', `    <main class="main">
+  write(path.join(OUT, 'blog', 'index.html'), blogPage('Blog · Akash Rawat', `    <main class="main">
       <h2>All Posts</h2>
       <ul class="postList">
 ${list}
@@ -93,7 +111,7 @@ ${list}
     </main>`));
 
   for (const p of posts) {
-    write(path.join(OUT, 'blog', p.slug, 'index.html'), blogPage(`${p.title} · Akash R.`, `    <article>
+    write(path.join(OUT, 'blog', p.slug, 'index.html'), blogPage(`${p.title} · Akash Rawat`, `    <article>
       <h1>${esc(p.title)}</h1>
       <div>${marked(p.content)}</div>
     </article>`));
@@ -104,7 +122,7 @@ ${list}
 // A tiny static server that behaves like GitHub Pages: folders serve index.html,
 // folder URLs without a trailing slash redirect, unknown paths get 404.html.
 function serve(port = 3000) {
-  const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.ico': 'image/x-icon' };
+  const types = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.json': 'application/json', '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml', '.webp': 'image/webp', '.ico': 'image/x-icon', '.xml': 'application/xml', '.txt': 'text/plain' };
   http.createServer((req, res) => {
     const url = decodeURIComponent(new URL(req.url, 'http://x').pathname);
     let file = path.join(OUT, url);
